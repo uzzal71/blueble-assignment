@@ -8,10 +8,16 @@ export const AuthenticateUser = (req, res, next) => {
       const token = authorization.split(" ")[1];
       const decode = jwt.verify(token, process.env.JWT_SECRET);
       const { user } = decode;
-      req.user = user;
+      req.user = {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      };
+      next();
+    } else {
+      throw new Error(401);
       next();
     }
-    throw new Error(401);
   } catch (error) {
     next(error);
   }

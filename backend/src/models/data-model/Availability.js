@@ -31,6 +31,10 @@ const AvailabilitySchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  create_date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Availability = mongoose.model("Availability", AvailabilitySchema);

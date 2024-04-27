@@ -1,5 +1,6 @@
 import app from "./app";
 import connectMongo from "./dbConnect/connectMongo";
+import ErrorHandleMiddleware from "./src/middlewares/ErrorHandleMiddleware";
 import RouteNotFoundMiddleware from "./src/middlewares/RouteNotFoundMiddleware";
 import routeConfiguration from "./src/routes";
 
@@ -22,23 +23,7 @@ app.get("/", (req, res) => {
 // router configuration
 routeConfiguration(app);
 app.use(RouteNotFoundMiddleware);
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  let message = "Internal Server Error";
-  let statusCode = 500;
-  if (err.message === "401") {
-    message = "Authentication failed";
-    statusCode = 401;
-  }
-
-  res.status(statusCode).json({
-    status: false,
-    message: message,
-    data: {},
-    statusCode: statusCode,
-  });
-});
+app.use(ErrorHandleMiddleware);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

@@ -8,9 +8,16 @@ import {
   updateAvailability,
 } from "../../controllers/AvailabilityController";
 
+import { HandleBodyRequest } from "../../middlewares/RequestValidationMiddleware";
+import validators from "../../models/request-model";
+
 const router = express.Router();
 
-router.post("/add", createAvailability);
+router.post(
+  "/add",
+  HandleBodyRequest(validators.CreateUpdateAvailabilityValidation),
+  createAvailability
+);
 router.get("/all", getAllAvailability);
 router.get("/edit/:id", getAvailability);
 router.put("/update/:id", updateAvailability);

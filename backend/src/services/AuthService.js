@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import models from "../models/data-model/index";
+import models from "../models/data-model";
 
 export const singupService = async (data) => {
   try {
