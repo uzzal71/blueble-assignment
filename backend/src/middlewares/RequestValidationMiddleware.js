@@ -1,6 +1,6 @@
 import { ApiFailed } from "../utils/ApiResponse";
 
-export const PostMethodHandleRequest = async (req, res, next) => {
+export const HandleBodyRequest = (validate) => (req, res, next) => {
   const result = validate(req.body);
   const isValid = result.error == null;
   if (isValid) {
@@ -11,7 +11,7 @@ export const PostMethodHandleRequest = async (req, res, next) => {
   return res.json(ApiFailed(message));
 };
 
-export const handleQueryValidation = (validate) => (req, res, next) => {
+export const HandleQueryValidation = (validate) => (req, res, next) => {
   const result = validate(req.query);
   const isValid = result.error == null;
   if (isValid) {
@@ -22,7 +22,7 @@ export const handleQueryValidation = (validate) => (req, res, next) => {
   return res.json(ApiFailed(message));
 };
 
-export const handleParamsValidation = (validate) => (req, res, next) => {
+export const HandleParamsValidation = (validate) => (req, res, next) => {
   const result = validate(req.params);
   const isValid = result.error == null;
   if (isValid) {

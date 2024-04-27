@@ -9,6 +9,7 @@ app.get("/", (req, res) => {
   res.send(`Bluble server running on port ${PORT}`);
 });
 
+// router configuration
 routeConfiguration(app);
 app.use(RouteNotFoundMiddleware);
 app.use(ErrorHandleMiddleware);
