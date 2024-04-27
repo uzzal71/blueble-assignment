@@ -1,4 +1,4 @@
-export const addAvailability = (req, res) => {
+export const createAvailability = (req, res) => {
   res.json({
     statusCode: 200,
     message: "Add availability successful",

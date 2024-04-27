@@ -1,4 +1,4 @@
-const errorHandler = (err, req, res, next) => {
+export default async (req, res) => {
   if (res.headersSend) {
     return next(err);
   }
@@ -6,5 +6,3 @@ const errorHandler = (err, req, res, next) => {
     error: err,
   });
 };
-
-export default errorHandler;
