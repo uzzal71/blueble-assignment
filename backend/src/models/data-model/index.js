@@ -1,9 +1,6 @@
 import Availability from "./Availability";
 import User from "./User";
 
-const models = {};
-
-models.User = User;
-models.Availability = Availability;
+const models = { User, Availability };
 
 export default models;

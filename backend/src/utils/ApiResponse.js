@@ -15,5 +15,3 @@ export const ApiFailed = (message, data = null, statusCode = 500) => {
     statusCode: statusCode,
   };
 };
-
-export default {};
