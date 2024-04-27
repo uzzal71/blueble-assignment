@@ -47,10 +47,100 @@ export const createAvailabilityService = async (req) => {
   }
 };
 
-export const getAllAvailabilityService = async (data) => {};
+export const getAllAvailabilityService = async (req) => {
+  try {
+    const user = req.user;
+    const availability = await models.Availability.find({
+      user: user.id,
+    });
 
-export const getAvailabilityService = async (data) => {};
+    return {
+      message: "Availability retrieved successfully",
+      data: {
+        availabilities: availability,
+      },
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
-export const updateAvailabilityService = async (data) => {};
+export const getAvailabilityService = async (req) => {
+  try {
+    const user = req.user;
+    const availability = await models.Availability.findOne({
+      user: user.id,
+      _id: req.params.id,
+    });
 
-export const deleteAvailabilityService = async (data) => {};
+    return {
+      message: "Availability retrieved successfully",
+      data: {
+        availability: availability,
+      },
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const updateAvailabilityService = async (req) => {
+  try {
+    const user = req.user;
+    const data = req.body;
+
+    // Find the availability to update
+    let availability = await models.Availability.findOne({
+      user: user.id,
+      _id: req.params.id,
+    });
+
+    if (!availability) {
+      throw new Error("Availability not found");
+    }
+
+    // Update the availability with the new data
+    availability.set({
+      start_time: data.start_time,
+      end_time: data.end_time,
+      day_of_week: data.day_of_week,
+    });
+
+    await availability.save();
+
+    return {
+      message: "Availability updated successfully",
+      data: {
+        availability: availability,
+      },
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const deleteAvailabilityService = async (req) => {
+  try {
+    const user = req.user;
+
+    // Find the availability to delete
+    let availability = await models.Availability.findOne({
+      user: user.id,
+      _id: req.params.id,
+    });
+
+    if (!availability) {
+      throw new Error("Availability not found");
+    }
+
+    // Delete the availability
+    await availability.remove();
+
+    return {
+      message: "Availability deleted successfully",
+      data: null,
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

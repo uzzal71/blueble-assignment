@@ -8,7 +8,10 @@ import {
   updateAvailability,
 } from "../../controllers/AvailabilityController";
 
-import { HandleBodyRequest } from "../../middlewares/RequestValidationMiddleware";
+import {
+  HandleBodyRequest,
+  HandleParamsValidation,
+} from "../../middlewares/RequestValidationMiddleware";
 import validators from "../../models/request-model";
 
 const router = express.Router();
@@ -19,8 +22,20 @@ router.post(
   createAvailability
 );
 router.get("/all", getAllAvailability);
-router.get("/edit/:id", getAvailability);
-router.put("/update/:id", updateAvailability);
-router.delete("/delete", deleteAvailability);
+router.get(
+  "/edit/:id",
+  HandleParamsValidation(validators.GetUpdateDeleteAvailabilityValication),
+  getAvailability
+);
+router.put(
+  "/update/:id",
+  HandleParamsValidation(validators.GetUpdateDeleteAvailabilityValication),
+  updateAvailability
+);
+router.delete(
+  "/delete/:id",
+  HandleParamsValidation(validators.GetUpdateDeleteAvailabilityValication),
+  deleteAvailability
+);
 
 export default router;

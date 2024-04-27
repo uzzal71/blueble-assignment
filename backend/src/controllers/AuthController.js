@@ -34,9 +34,5 @@ export const logout = (req, res) => {
   res.cookie("isLoggedIn", false, {});
   res.cookie("user", {}, {});
 
-  res.json({
-    statusCode: 200,
-    message: "Logout successful",
-    data: {},
-  });
+  return res.status(200).json(ApiSuccess("Logout successful", null, 200));
 };

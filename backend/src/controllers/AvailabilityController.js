@@ -20,7 +20,7 @@ export const createAvailability = async (req, res) => {
 
 export const getAllAvailability = async (req, res) => {
   try {
-    const response = await getAllAvailabilityService(req.body);
+    const response = await getAllAvailabilityService(req);
     return res
       .status(200)
       .json(ApiSuccess(response.message, response.data, 200));
@@ -31,7 +31,7 @@ export const getAllAvailability = async (req, res) => {
 
 export const getAvailability = async (req, res) => {
   try {
-    const response = await getAvailabilityService(req.body);
+    const response = await getAvailabilityService(req);
     return res
       .status(200)
       .json(ApiSuccess(response.message, response.data, 200));
@@ -42,7 +42,7 @@ export const getAvailability = async (req, res) => {
 
 export const updateAvailability = async (req, res) => {
   try {
-    const response = await updateAvailabilityService(req.body);
+    const response = await updateAvailabilityService(req);
     return res
       .status(201)
       .json(ApiSuccess(response.message, response.data, 201));
@@ -53,7 +53,7 @@ export const updateAvailability = async (req, res) => {
 
 export const deleteAvailability = async (req, res) => {
   try {
-    const response = await deleteAvailabilityService(req.body);
+    const response = await deleteAvailabilityService(req);
     return res
       .status(200)
       .json(ApiSuccess(response.message, response.data, 200));
