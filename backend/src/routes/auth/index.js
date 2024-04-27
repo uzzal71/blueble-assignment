@@ -61,6 +61,8 @@ router.post("/login", HandleBodyRequest(validators.LoginValidation), login);
  *      - Auth
  *     summary: Logout
  *     description: Logout the currently authenticated user
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: User logged out successfully

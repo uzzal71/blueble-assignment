@@ -30,6 +30,8 @@ const router = express.Router();
  *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/Signup'
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       201:
  *         description: Availability create successfully
@@ -50,12 +52,8 @@ router.post(
  *      - Availability
  *     summary: Gets availability
  *     description: Gets availability
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Signup'
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Get all availability
@@ -72,12 +70,8 @@ router.get("/all", getAllAvailability);
  *      - Availability
  *     summary: Get availability
  *     description: Get availability
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Signup'
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Get availability
@@ -104,6 +98,8 @@ router.get(
  *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/Signup'
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       201:
  *         description: Update availability
@@ -130,6 +126,8 @@ router.put(
  *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/Signup'
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Delete availability
