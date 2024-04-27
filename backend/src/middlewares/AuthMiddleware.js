@@ -4,12 +4,14 @@ export const AuthenticateUser = (req, res, next) => {
   const { authorization } = req.headers;
 
   try {
-    const token = authorization.split(" ")[1];
-    const decode = jwt.verify(token, process.env.JWT_SECRET);
-    const { username, userId } = decode;
-    req.username = username;
-    req.userId = userId;
-    next();
+    if (authorization) {
+      const token = authorization.split(" ")[1];
+      const decode = jwt.verify(token, process.env.JWT_SECRET);
+      const { user } = decode;
+      req.user = user;
+      next();
+    }
+    throw new Error(401);
   } catch (error) {
     next(error);
   }

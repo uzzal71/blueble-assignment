@@ -15,8 +15,6 @@ async function connectMongo() {
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
     };
     cached.promise = mongoose.connect(MONGO_URI, opts);
   }
