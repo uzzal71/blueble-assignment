@@ -3,11 +3,7 @@ import mongoose from "mongoose";
 export const UserSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: "Enter a name",
-  },
-  username: {
-    type: String,
-    required: "Enter a username",
+    required: true,
   },
   email: {
     type: String,
@@ -15,10 +11,11 @@ export const UserSchema = new mongoose.Schema({
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
       "Please fill a valid email address",
     ],
+    unique: true,
   },
   password: {
     type: String,
-    required: "Enter a password",
+    required: true,
   },
   status: {
     type: String,

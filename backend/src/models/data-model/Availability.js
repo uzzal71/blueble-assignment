@@ -14,7 +14,7 @@ const availabilitySchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  day_off_week: {
+  day_of_week: {
     type: String,
     enum: [
       "Sunday",
