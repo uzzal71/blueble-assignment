@@ -1,3 +1,4 @@
+import models from "../models/data-model";
 import { loginService, singupService } from "../services/AuthService";
 import { ApiFailed, ApiSuccess } from "../utils/ApiResponse";
 
@@ -29,10 +30,20 @@ export const login = async (req, res) => {
   }
 };
 
-export const logout = (req, res) => {
-  res.cookie("access_token", "", {});
-  res.cookie("isLoggedIn", false, {});
-  res.cookie("user", {}, {});
+export const logout = async (req, res) => {
+  try {
+    if (req.headers && req.headers.authorization) {
+      const token = req.headers.authorization.split(" ")[1];
+      if (!token) {
+        return res
+          .status(401)
+          .json({ success: false, message: "Authorization fail!" });
+      }
 
-  return res.status(200).json(ApiSuccess("Logout successful", null, 200));
+      await models.User.findByIdAndUpdate(req.user.id, { tokens: [] });
+      return res.status(200).json(ApiSuccess("Logout successful", null, 200));
+    }
+  } catch (error) {
+    return res.status(401).json(ApiFailed(error.message, {}, 401));
+  }
 };

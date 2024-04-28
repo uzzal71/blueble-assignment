@@ -45,6 +45,21 @@ export const loginService = async (data) => {
           expiresIn: process.env.JWT_EXPIRATION,
         });
 
+        let oldTokens = user.tokens || [];
+
+        if (oldTokens.length) {
+          oldTokens = oldTokens.filter((t) => {
+            const timeDiff = (Date.now() - parseInt(t.signedAt)) / 1000;
+            if (timeDiff < 86400) {
+              return t;
+            }
+          });
+        }
+
+        await models.User.findByIdAndUpdate(user._id, {
+          tokens: [...oldTokens, { token, signedAt: Date.now().toString() }],
+        });
+
         return {
           message: "Login Successfully",
           data: {

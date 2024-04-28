@@ -5,6 +5,7 @@ const CreateUpdateAvailabilitySchema = Joi.object().keys({
   end_time: Joi.date().required(),
   day_of_week: Joi.string().required(),
   is_expired: Joi.optional(),
+  tokens: Joi.optional(),
 });
 
 const CreateUpdateAvailabilityValidate = (data) => {
