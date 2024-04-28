@@ -11,10 +11,25 @@ const swaggerOptions = {
       },
       servers: [`http://localhost:${process.env.PORT}`],
     },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
   },
   apis: [
-    path.resolve(__dirname, "../routes/auth/index.js"),
-    path.resolve(__dirname, "../routes/availability/index.js"),
+    path.resolve(__dirname, "../routes/auth/*.js"),
+    path.resolve(__dirname, "../routes/availability/*.js"),
+    path.resolve(__dirname, "../models/schema/*.js"),
   ],
 };
 

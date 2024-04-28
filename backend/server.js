@@ -1,14 +1,15 @@
-import swaggerJsDoc from "swagger-jsdoc";
+// import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import app from "./app";
 import connectMongo from "./dbConnect/connectMongo";
 import ErrorHandleMiddleware from "./src/middlewares/ErrorHandleMiddleware";
 import RouteNotFoundMiddleware from "./src/middlewares/RouteNotFoundMiddleware";
 import routeConfiguration from "./src/routes";
-import swaggerOptions from "./src/utils/Swagger";
+// import swaggerOptions from "./src/utils/Swagger";
+import swaggerDocument from "./api-document.json";
 
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+// const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const port = process.env.PORT || 3000;
 

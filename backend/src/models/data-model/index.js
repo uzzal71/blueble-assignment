@@ -1,4 +1,4 @@
-import Availability from "./Availability";
+import Availability from "./Availability.js";
 import User from "./User";
 
 const models = { User, Availability };
