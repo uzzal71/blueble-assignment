@@ -78,7 +78,12 @@
         "responses": {
           "200": { "description": "Logout successful" },
           "400": { "description": "Bad request" }
-        }
+        },
+        "security": [
+          {
+            "jwt_auth": []
+          }
+        ]
       }
     },
     "/api/availability/add": {
