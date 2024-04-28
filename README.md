@@ -13,6 +13,7 @@ cd blueble-assignment
 ```
 cd backend
 npm install
+rename example.env
 npm run dev
 url: http://localhost:3000
 api-doc: http://localhost:3000/api-docs/#/
