@@ -11,7 +11,6 @@ export const singupService = async (data) => {
       password: hashedPassword,
       status: data.status || "active",
       create_date: data.create_date || new Date(),
-      tokens: [],
     });
 
     await newUser.save();
@@ -44,21 +43,6 @@ export const loginService = async (data) => {
         // generate token
         const token = jwt.sign({ user: user }, process.env.JWT_SECRET, {
           expiresIn: process.env.JWT_EXPIRATION,
-        });
-
-        let oldTokens = user.tokens || [];
-
-        if (oldTokens.length) {
-          oldTokens = oldTokens.filter((t) => {
-            const timeDiff = (Date.now() - parseInt(t.signedAt)) / 1000;
-            if (timeDiff < 86400) {
-              return t;
-            }
-          });
-        }
-
-        await models.User.findByIdAndUpdate(user._id, {
-          tokens: [...oldTokens, { token, signedAt: Date.now().toString() }],
         });
 
         return {
