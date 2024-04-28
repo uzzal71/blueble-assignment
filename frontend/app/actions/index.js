@@ -1,7 +1,6 @@
 "use server";
 
 import axios from "axios";
-import { redirect } from "next/navigation";
 
 async function registerUser(formData) {
   const user = Object.fromEntries(formData);
@@ -14,26 +13,32 @@ async function registerUser(formData) {
     },
     {
       headers: {
-        "Content-Type": "application/json", // Specify the content type as JSON
+        "Content-Type": "application/json",
       },
     }
   );
 
-  redirect("/login");
+  return response.data;
 }
 
-async function performLogin(formData) {}
+async function performLogin(formData) {
+  try {
+    const credential = {};
+    credential.email = formData.get("email");
+    credential.password = formData.get("password");
+    const response = await axios.post(
+      "http://localhost:3000/api/auth/login",
+      credential,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
 
-async function addInterestedEvent(eventId, authId) {}
-
-async function addGoingEvent(eventId, user) {}
-
-async function sendEmail(eventId, user) {}
-
-export {
-  addGoingEvent,
-  addInterestedEvent,
-  performLogin,
-  registerUser,
-  sendEmail,
-};
+export { performLogin, registerUser };

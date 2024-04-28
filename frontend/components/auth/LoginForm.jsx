@@ -16,10 +16,12 @@ const LoginForm = () => {
     event.preventDefault();
     try {
       const formData = new FormData(event.currentTarget);
-      const found = await performLogin(formData);
+      const result = await performLogin(formData);
 
-      if (found) {
-        setAuth(found);
+      if (result.status) {
+        setAuth(result.data.user);
+        localStorage.setItem("access_token", result.data.access_token);
+        localStorage.setItem("user", result.data.user);
         router.push("/");
       } else {
         setError("Please provide a valid login credential");
