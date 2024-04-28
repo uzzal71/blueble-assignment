@@ -2,7 +2,6 @@
 import { useAuth } from "@/app/hooks/useAuth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 const SignInOut = () => {
   const { auth, setAuth } = useAuth();
@@ -14,10 +13,6 @@ const SignInOut = () => {
     setAuth(null);
     router.push("/login");
   };
-
-  useEffect(() => {
-    setAuth(localStorage.getItem("user"));
-  });
 
   return (
     <div>
