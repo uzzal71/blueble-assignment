@@ -53,11 +53,11 @@
               "properties": {
                 "email": {
                   "type": "string",
-                  "example": "johndoe@gmail.com"
+                  "default": "johndoe@gmail.com"
                 },
                 "password": {
                   "type": "string",
-                  "example": "password"
+                  "default": "password"
                 }
               }
             }
@@ -78,6 +78,122 @@
         "responses": {
           "200": { "description": "Logout successful" },
           "400": { "description": "Bad request" }
+        }
+      }
+    },
+    "/api/availability/add": {
+      "post": {
+        "tags": ["Availability"],
+        "summary": "Create a new availability",
+        "description": "Endpoint to create availability",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Availability add request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Availability"
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "Availability created successfully" },
+          "400": { "description": "Bad request" }
+        }
+      }
+    },
+    "/api/availability/all": {
+      "get": {
+        "tags": ["Availability"],
+        "summary": "Get all availability",
+        "description": "Endpoint to get availability",
+        "responses": {
+          "200": { "description": "Get all availability successful" },
+          "401": { "description": "Authentication failed" }
+        }
+      }
+    },
+    "/api/availability/edit/{id}": {
+      "get": {
+        "tags": ["Availability"],
+        "summary": "Availability get",
+        "description": "Endpoint to get availability",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Set availability ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Get availability successful" },
+          "401": { "description": "Authentication failed" }
+        }
+      }
+    },
+    "/api/availability/update/{id}": {
+      "put": {
+        "tags": ["Availability"],
+        "summary": "Availability update",
+        "description": "Endpoint to update availability",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Set availability ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Availability update requst body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "start_time": {
+                  "type": "string",
+                  "default": "2024-04-29 17:12:24"
+                },
+                "end_time": {
+                  "type": "string",
+                  "default": "2024-04-29 21:12:24"
+                },
+                "day_of_week": {
+                  "type": "string",
+                  "default": "Sunday"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "Availability update successfully" },
+          "401": { "description": "Authentication failed" }
+        }
+      }
+    },
+    "/api/availability/delete/{id}": {
+      "delete": {
+        "tags": ["Availability"],
+        "summary": "Availability delete",
+        "description": "Endpoint to delete availability.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Set availability ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Availability delete successfully" },
+          "401": { "description": "Authentication failed" }
         }
       }
     }
@@ -103,17 +219,17 @@
     "Availability": {
       "type": "object",
       "properties": {
-        "user": {
-          "type": "string"
-        },
         "start_time": {
-          "type": "string"
+          "type": "string",
+          "default": "2024-04-28 17:12:24"
         },
         "end_time": {
-          "type": "string"
+          "type": "string",
+          "default": "2024-04-28 21:12:24"
         },
         "day_of_week": {
-          "type": "string"
+          "type": "string",
+          "default": "Sunday"
         }
       }
     }
