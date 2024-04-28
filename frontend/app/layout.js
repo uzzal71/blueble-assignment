@@ -6,9 +6,8 @@ import AuthProvider from "./providers/AuthProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Eventry - Home",
-  description:
-    "A single entry to connected to all the online events from the globe.",
+  title: "Blueble - Home",
+  description: "A blueble live website.",
 };
 
 export default async function RootLayout({ children }) {

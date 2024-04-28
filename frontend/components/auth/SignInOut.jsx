@@ -21,6 +21,7 @@ const SignInOut = () => {
           <a className="cursor-pointer" onClick={logout}>
             Logout
           </a>
+          <Link href="/availability">Availability</Link>
         </>
       ) : (
         <Link href="/login">Login</Link>

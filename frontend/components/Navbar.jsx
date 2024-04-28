@@ -15,8 +15,6 @@ const Navbar = () => {
           <li>
             <SignInOut />
           </li>
-          <li>About</li>
-          <li>Contact Us</li>
         </ul>
       </div>
     </nav>
