@@ -11,6 +11,7 @@ export const singupService = async (data) => {
       password: hashedPassword,
       status: data.status || "active",
       create_date: data.create_date || new Date(),
+      tokens: [],
     });
 
     await newUser.save();
