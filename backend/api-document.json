@@ -100,7 +100,12 @@
         "responses": {
           "201": { "description": "Availability created successfully" },
           "400": { "description": "Bad request" }
-        }
+        },
+        "security": [
+          {
+            "jwt_auth": []
+          }
+        ]
       }
     },
     "/api/availability/all": {
@@ -111,7 +116,12 @@
         "responses": {
           "200": { "description": "Get all availability successful" },
           "401": { "description": "Authentication failed" }
-        }
+        },
+        "security": [
+          {
+            "jwt_auth": []
+          }
+        ]
       }
     },
     "/api/availability/edit/{id}": {
@@ -131,7 +141,12 @@
         "responses": {
           "200": { "description": "Get availability successful" },
           "401": { "description": "Authentication failed" }
-        }
+        },
+        "security": [
+          {
+            "jwt_auth": []
+          }
+        ]
       }
     },
     "/api/availability/update/{id}": {
@@ -174,7 +189,12 @@
         "responses": {
           "201": { "description": "Availability update successfully" },
           "401": { "description": "Authentication failed" }
-        }
+        },
+        "security": [
+          {
+            "jwt_auth": []
+          }
+        ]
       }
     },
     "/api/availability/delete/{id}": {
@@ -194,8 +214,21 @@
         "responses": {
           "200": { "description": "Availability delete successfully" },
           "401": { "description": "Authentication failed" }
-        }
+        },
+        "security": [
+          {
+            "jwt_auth": []
+          }
+        ]
       }
+    }
+  },
+  "securityDefinitions": {
+    "jwt_auth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "JWT authorization header using the Bearer scheme."
     }
   },
   "definitions": {
